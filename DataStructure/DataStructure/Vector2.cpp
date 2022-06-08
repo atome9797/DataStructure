@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    //벡터 생성하기
+    //벡터 컨테이너 생성(클래스 템플릿)
     vector<int> vec;
     cout << boolalpha << vec.empty() << endl;
     cout << vec.size() << endl;
@@ -21,11 +21,20 @@ int main()
     //반복자
     // begin() : 컨테이너의 첫 원소를 가리키는 반복자
     // end() : 컨테이너의 마지막 원소의 다음을 가리키는 반복자
+
+    //범위지정연산자 :: 사용
+        //vector<int> 클래스 안의 재정의된 iterator 클래스 템플릿을 가져와서 사용한다.
+        //vector<int> 벡터 컨테이너는 포인터 배열 이므로 주소값을 할당받을수 있다.
+    
+        //벡터 컨테이너의 int형 반복자(포인터) 선언 => 벡터의 원소에 접근 가능
+        //iterator class 는 포인터역할을 대신해줌 => iterator class는 값으로 주소를 받는다.
     for (vector<int>::iterator iter = vec.begin(); iter != vec.end(); iter++)
     {
         cout << *iter << ",";
     }
+    
     cout << endl;
+
 
     //{2, 4, 3}
     // rebegin() : 컨테이너의 마지막원소를 가리키는 반복자
@@ -68,7 +77,7 @@ int main()
 
     //읽기
     cout << vec.front() << endl; //5
-    cout << vec.back() << endl;//5
+    cout << vec.back() << endl; //5
     cout << vec[2] << endl;//5
 
     //검색 => 메소드가 아니라 알고리즘 라이브러리에서 찾아볼수 있다.

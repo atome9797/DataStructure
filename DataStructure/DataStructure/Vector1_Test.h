@@ -17,8 +17,8 @@ struct MyObject
 class MyVector
 {
 
-    using iterator = MyObject*;
-    using const_iterator = const MyObject*;
+    using iterator = MyObject*; //반복자를 재정의 해준다.
+    using const_iterator = const MyObject*; //반복자를 재정의 해준다.
 
 private: // 구현에 필요한 멤버 추가 함수/변수들을 자유롭게 아래에 정의 합니다.
 
@@ -110,13 +110,24 @@ public: // 생성자, 복사생성자, 할당연산자, 소멸자를 .cpp 파일에 구현합니다.
         {
             return *this;
         }
-        MyVector temp(other);
+        /*
+            MyVector vec1;
+            MyVector vec2;
+
+            vec1 = vec2; 
+            vec1(vec2);
+
+            vec1 클래스 vec2 클래스 데이터 공존한 상태가됨
+            =>  swap으로 vec1에 vec2로 데이터를 바꿔줌
+        */
+        MyVector temp(other); //복사 생성자 
         std::swap(_container, other._container);
         std::swap(_size, other._size);
         std::swap(_capacity, other._capacity);
 
         return *this;
     }
+
     // Destructor.
     ~MyVector()
     {
