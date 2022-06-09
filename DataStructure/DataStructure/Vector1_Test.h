@@ -163,7 +163,8 @@ public: // 아래 기능 함수들을 .cpp 파일에 구현합니다.
 
     // Returns the first occurrence of MyObject instance with the given ID.
     // Returns nullptr if not found.
-    // 주어진 ID를 가진 MyObject 인스턴스의 첫 번째 항목을 반환합니다.
+    // 주어진 ID를 가진 MyObject 인스턴스의 첫 번째 항목을 반환합니다. 
+    // => 4바이트 주소 단위로  1 2 3 4 5 의 값이 들어있음 
     // 찾을 수 없으면 nullptr을 반환합니다.
     MyObject* FindById(int MyObjectId) const
     {
@@ -201,6 +202,7 @@ public: // 아래 기능 함수들을 .cpp 파일에 구현합니다.
     // 벡터의 문자열 표현을 반환합니다.
     std::string ToString() const
     {
+
         std::stringstream ss;
 
         ss << "[";
@@ -223,19 +225,26 @@ public: // 아래 기능 함수들을 .cpp 파일에 구현합니다.
 
     // Remove all MyObject instances with the given ID in this vector.
     //이 벡터에서 주어진 ID를 가진 모든 MyObject 인스턴스를 제거합니다.
+    //id랑 같은 원소들 다 지우기
     void RemoveAll(int MyObjectId)
     {
-        iterator iter = begin();
+        //주소접근후 값을 지우기 때문에 struct 포인터의 값이 바뀌게된다
+        //=> 동적 할당및 동적 삭제
+        iterator iter = begin(); //구조체 포인터로 구조체의 주소값을 받음
 
         while (iter != end())
         {
+            //해당 구조체의 멤버가 주어진 id랑 값이 같으면
             if (iter->_id == MyObjectId)
             {
-                iter = erase(iter);
+                iter = erase(iter); //구조체 포인터의 주소값의 value값을 하나 삭제함 => 주소값은 그대로인데, 주소에 들어간 값이 사라지고 앞으로 값이 당겨짐
+                    //앞으로 당겨지면서 다음값이 현재 주소를 가리키게 됨으로
+                    //주소연산 안하고 while문으로 다음 차례에서 현재 주소를 다시 검사함
             }
             else
             {
                 iter++;
+                //안 당겨 지면 ++ 연산으로 다음으로 넘어감
             }
         }
         /* for (int i = 0; _container != nullptr; i++)
@@ -256,27 +265,47 @@ public: // 아래 기능 함수들을 .cpp 파일에 구현합니다.
     // 각각의 요소는 MyObject 구조체의 동일한 "_id" 값을 갖습니다.
     // 'numGroups'는 out 매개변수이며 값을 다음으로 설정해야 합니다.
     // 반환할 MyVector 배열의 크기입니다.
+    // 
     MyVector* GroupById(int* numGroups)
     {
         MyVector ids;
         for (size_t i = 0; i < _size; i++)
         {
+            //새로 선언한 벡터에 이미 존재하는 벡터의 요소값이존재하지 않으면
+            //새로 선언한 벡터의 요소에 해당 요소값을 삽입해줌 
+            //103 사이즈의 요소에는 1,2,3,4 랜덤값이 들어 있음
             if (ids.FindById(_container[i]._id) == nullptr)
             {
                 ids.Add(_container[i]._id);
             }
 
         }
+        //1234 만들어 갔으므로 count는 4가됨
         int count = ids.GetSize();
         MyVector* result = new MyVector[count];
 
         for (size_t i = 0; i < _size; i++)
         {
+                                    //구조체포인터 주소 - 구조체 포인터 주소 => 배열 인덱스 나옴
+            //1,2,3,4 값이 들어간 구조체 주소와 구조체 주소 초기값을 뺀 값 
+            //size_t는 int형 이므로 주소의 뺀값은 4바이트 단위로 측정됨
+            //000001D8703E1DC4
+            //000001D8703E1DC0
+            //size_t index는 1됨
             size_t index = ids.FindById(_container[i]._id) - ids.begin();
+            printf("컨테이너 주소 : %p\n", ids.FindById(_container[i]._id));
+            printf("컨테이너 시작 주소 : %p\n", ids.begin());
+
+
+            printf("주소 차이 : %d\n", index);
+            printf("사이즈 2 : %d\n", _size);
+
+            //103 size의 배열을 4개의 벡터 컨테이너에 나눠서 담음
             result[index].Add(_container[i]._id);
+            //result[i].Add(_container[i]._id);
         }
 
-        *numGroups = count;
+        *numGroups = count; //vector 원소크기만큼 vector배열을 만들어서 각원소 1개를 각 vector하나에넣게됨
         return result;
 
     }
