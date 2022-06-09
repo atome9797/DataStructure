@@ -91,7 +91,37 @@ int main()
 	//}
 
 
-	
+	//부녀 회장
+	//입력
+	// 1. 테스트 캐이스와 테스트 케이스에 따른 k층과 n호를 입력 받는다.
+	int test_case = 0;
+	scanf("%d", &test_case);
+
+	//처리
+	// 1.  
+	for (int i = 0; i < test_case; i++)
+	{
+		int k = 0;
+		int n = 0;
+
+		scanf("%d", &k);
+		scanf("%d", &n);
+
+		if (k == 0) {
+			printf("%d\n", n);
+			continue;
+		}
+
+		int department[14][14];
+		for (int i = 1; i <= 14; i++)
+		{
+			department[0][i] = i; //0층
+		}
+
+		
+
+	}
+	//출력
 
 
 	return 0;
