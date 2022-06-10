@@ -30,6 +30,9 @@
     <ClCompile Include="Beakjoon_220609.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Solution_01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector1.h">

@@ -118,7 +118,18 @@ int main()
 			department[0][i] = i; //0Ãş
 		}
 
-		
+
+
+		for (int i = 0; i <= 14; i++)
+		{
+			for (int j = 0; j <= 14; j++)
+			{
+				for (int k = 0; k < j; k++)
+				{
+					department[i][j] += department[i][k];
+				}
+			}
+		}
 
 	}
 	//Ãâ·Â
