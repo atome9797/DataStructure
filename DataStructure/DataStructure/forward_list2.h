@@ -9,10 +9,17 @@ class ForwardList
     struct Node
 
     {
-        Node(int data = 0, Node* next = nullptr);
+ 
+        Node(int data = 0, Node* next = nullptr)
+        {
+            
+        }
         Node(const Node&) = delete;
         Node& operator=(const Node&) = delete;
-        ~Node();
+        ~Node()
+        {
+
+        }
 
         int     Data = 0; //실제 데이터
         Node* Next = nullptr; //다음원소주소 포인터
