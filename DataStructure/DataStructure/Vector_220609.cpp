@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
+#include <algorithm>
 using namespace std;
 
 
@@ -18,24 +18,28 @@ vector<int> solution(vector<int> answers) {
     vector<int> answer2 = { 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5 }; //8개씩 반복
     vector<int> answer3 = { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 }; // 10개씩 반복
 
+    static const int solution[3][10] = {
+        { 1, 2, 3, 4, 5},
+        { 2, 1, 2, 3, 2, 4, 2, 5},
+        { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+    };
+    static const int patternSize[3] = { 5,8,10 };
+
     int count = 0;
     for (vector<int>::iterator iter = answers.begin(); iter != answers.end(); iter++)
     {
-        int answer1_pattern = count % 5;//0 ~ 4
-        int answer2_pattern = count % 8;//0 ~ 7
-        int answer3_pattern = count % 10;//0 ~ 9
-
-        if (*iter == answer1[answer1_pattern])
+        
+        if (*iter == solution[0][count % patternSize[0]])
         {
             answer_count[0] += 1;
         }
 
-        if (*iter == answer2[answer2_pattern])
+        if (*iter == solution[1][count % patternSize[1]])
         {
             answer_count[1] += 1;
         }
 
-        if (*iter == answer3[answer3_pattern])
+        if (*iter == solution[2][count % patternSize[2]])
         {
             answer_count[2] += 1;
         }
@@ -53,6 +57,9 @@ vector<int> solution(vector<int> answers) {
             answer.push_back(i + 1);
         }
     }
+
+    sort(answer.begin(), answer.end());
+
 
     return answer;
 }
