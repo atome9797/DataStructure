@@ -1,10 +1,17 @@
 #include "forward_list2.h"
 #include <utility>
 
+
+
+
+
+
 // 기본 생성자
 ForwardList::ForwardList()
 {
-	_head->Next = _end;
+	//begin() == end()
+	//head->Next == nullptr
+	//_head = new Node(0, nullptr)
 }
 
 // count만큼의 요소를 갖고 있는 컨테이너를 만드는 생성자
@@ -22,10 +29,13 @@ ForwardList::ForwardList(const ForwardList& other)
 {
 	Node* inserted = before_begin();
 	
-	for (int i = 0; other._head[i].Data != '\0'; i++)
+	
+	for (const Node* iter = other.begin(); iter != other.end(); iter++)
 	{
-		inserted = insert_after(inserted, other._head[i].Data); //두번째 주소부터의 포인터 반복자를 iterator에 넣어줌
+		inserted = insert_after(inserted, other._head->Data); //두번째 주소부터의 포인터 반복자를 iterator에 넣어줌
 	}
+
+
 }
 
 // 할당 연산자
@@ -37,7 +47,6 @@ ForwardList& ForwardList::operator=(const ForwardList& rhs)
 	{
 		ForwardList temp(rhs);
 		std::swap(_head, temp._head);
-		std::swap(_end, temp._end);
 	}
 	return *this;
 }
@@ -47,9 +56,7 @@ ForwardList::~ForwardList()
 {
 	clear();
 
-	delete _end;
 	delete _head;
-	_end = nullptr;
 	_head = nullptr;
 }
 
@@ -65,6 +72,11 @@ ForwardList::Node* ForwardList::before_begin()
 	return _head;
 }
 
+const ForwardList::Node* ForwardList::before_begin() const
+{
+	return _head;
+}
+
 
 // 시작 요소를 가리키는 반복자를 반환한다.
 ForwardList::Node* ForwardList::begin()
@@ -72,11 +84,22 @@ ForwardList::Node* ForwardList::begin()
 	return _head->Next;
 }
 
+const ForwardList::Node* ForwardList::begin() const
+{
+	return _head->Next;
+}
+
+
 
 // 끝 다음 요소를 가리키는 반복자를 반환한다.
 ForwardList::Node* ForwardList::end()
 {
-	return _end;
+	return nullptr;
+}
+
+const ForwardList::Node* ForwardList::end() const
+{
+	return nullptr;
 }
 
 // pos 다음에 value를 삽입한다.
@@ -110,6 +133,22 @@ ForwardList::Node* ForwardList::erase_after(Node* pos)
 	return removed;
 }
 
+const ForwardList::Node* ForwardList::erase_after(Node* pos) const
+{
+	/*if (empty)
+	{
+		return end();
+	}*/
+
+	Node* where = pos;
+	Node* removed = pos->Next;
+	where->Next = removed->Next;
+	//removed->Next = nullptr;
+	delete removed;
+
+	return where->Next;
+}
+
 // 시작 요소에 value를 삽입한다.
 void	ForwardList::push_front(int value)
 {
@@ -125,7 +164,7 @@ void    ForwardList::pop_front()
 // 컨테이너가 비었는지 판단한다.
 bool    ForwardList::empty() const
 {
-	if (_head->Next == _end)
+	if (_head->Next == nullptr)
 	{
 		return true;
 	}
@@ -147,9 +186,11 @@ void    ForwardList::clear()
 // value가 있는지 검사한다.
 bool    ForwardList::contains(int value) const
 {
-	for (int i = 0; _head[i].Data != '\0'; i++)
+	
+
+	for (const Node* iter= begin(); iter != end(); iter++)
 	{
-		if (_head[i].Data == value)
+		if (iter->Data == value)
 		{
 			return true;
 		}

@@ -149,7 +149,9 @@
     <ClCompile Include="forward_list.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="forward_list_make_re1.cpp" />
+    <ClCompile Include="forward_list_make_re1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="fstream.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -162,6 +164,7 @@
     <ClCompile Include="list.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="list_make.cpp" />
     <ClCompile Include="sstream.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -193,6 +196,7 @@
   <ItemGroup>
     <ClInclude Include="forward_list.h" />
     <ClInclude Include="forward_list2.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Vector1.h" />
     <ClInclude Include="Vector1_Test.h" />
   </ItemGroup>

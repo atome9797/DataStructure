@@ -3,6 +3,7 @@
 
 class ForwardList
 {
+public:
     //연결리스트에서 데이터를 저장하기 위한 타입
     //즉 연결 리스트는 데이터를 직접적으로 다루는 것이 아니라 
     //node라는것으로 다룬다.
@@ -10,16 +11,10 @@ class ForwardList
 
     {
  
-        Node(int data = 0, Node* next = nullptr)
-        {
-            
-        }
+        Node(int data = 0, Node* next = nullptr);
         Node(const Node&) = delete;
         Node& operator=(const Node&) = delete;
-        ~Node()
-        {
-
-        }
+        ~Node();
 
         int     Data = 0; //실제 데이터
         Node* Next = nullptr; //다음원소주소 포인터
@@ -50,21 +45,26 @@ public:
 
     // 시작 전 요소를 가리키는 반복자를 반환한다.
     Node* before_begin();
+    const Node* before_begin() const;
     
     // 시작 요소를 가리키는 반복자를 반환한다.
     Node*            begin();
+    const Node*            begin()const;
     
     // 끝 다음 요소를 가리키는 반복자를 반환한다.
     Node*            end();
+    const Node*            end() const;
 
     // pos 다음에 value를 삽입한다.
     // 삽입된 요소를 가리키는 반복자를 반환한다.
     Node* insert_after(Node* pos, int value);
+    const Node* insert_after(Node* pos, int value) const;
 
     // pos 다음 요소를 삭제한다.
     // 삭제된 요소의 다음 요소를 가리키는 반복자를 반환한다.
     // 아무 요소도 없으면 end()를 반환한다.
-    Node* erase_after(Node* pos);
+    Node* erase_after(Node* pos) ;
+    const Node* erase_after(Node* pos) const;
 
     // 시작 요소에 value를 삽입한다.
     void                push_front(int value);
@@ -84,7 +84,7 @@ private:
     //더미 노드, 실제 데이터를 담지 않음, 오로지 구현의 편의성만을 위해 존재
 
     //처음 선언시 => _head -> data + 다음 주소(end) -> end 데이터순으로들어감
-    Node* _head = new Node(); //before_begin() 
-    //더미 노드
-    Node* _end = new Node(); //end()
+    Node* _head = new Node(); //before_begin()
 };
+
+

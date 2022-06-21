@@ -2,6 +2,151 @@
 #include <utility>
 #include <iostream>
 
+//노드에 대한 값과 다음 주소를 생성함
+ForwardList::Node::Node(int data, Node* next)
+	: Data(data), Next(next)
+{
+
+}
+
+ForwardList::Node::~Node()
+{
+	Next = nullptr;
+}
+
+//새로운 주소값을 넘겨줌
+ForwardList::const_iterator::const_iterator(Node* p)
+	:_p(p)
+{
+
+}
+
+//_p(주소값)를 null로 초기화
+ForwardList::const_iterator::~const_iterator()
+{
+	_p = nullptr;
+}
+
+//const_iterator 클래스의 역잠초 데이터를 반환
+const int& ForwardList::const_iterator::operator*()const
+{
+	return _p->Data; //데이터를 반환함
+}
+
+//데이터에 대한 주소값을 반환하여, 해당 주소값을 -> 로 받음
+const int* ForwardList::const_iterator::operator->()const
+{
+	return &(_p->Data); //데이터에 대한 주소를 반환함
+}
+
+//자기 자신의 주소의 다음 주소로 받은후 자기 자신을 반환함
+ForwardList::const_iterator& ForwardList::const_iterator::operator++()
+{ 
+	_p = _p->Next;
+	return *this; //자기 자신을 다시 사용함
+}
+
+//자기 자신의 주소값을 받은 후 포인터 주소값을 변경한후 , iterator 주소값을 반환함으로써 
+ForwardList::const_iterator ForwardList::const_iterator::operator++(int)
+{
+	//p++
+	//1. p를 1증가 시키고
+	//2. 이전 p를 반환
+	const_iterator temp = *this;
+	_p = _p->Next; //리턴 해준값이 전 주소값이고, _p는 다음 주소값을 가리킴
+	return temp;
+}
+
+bool ForwardList::const_iterator::operator==(const const_iterator& rhs) const
+{
+	if (_p == rhs._p)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool ForwardList::const_iterator::operator!=(const const_iterator& rhs) const
+{
+	return !(*this == rhs);
+}
+
+bool ForwardList::const_iterator::operator==(nullptr_t p) const
+{
+	//nullptr;//c++ 11
+	//왜 나왔냐면 null의 모호함 때문
+	//null은 정수로써 0도 되고
+	//포인터로써 null도 되기 때문
+
+	if(_p == nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool ForwardList::const_iterator::operator!=(nullptr_t p) const
+{
+	//nullptr;//c++ 11
+	//왜 나왔냐면 null의 모호함 때문
+	//null은 정수로써 0도 되고
+	//포인터로써 null도 되기 때문
+
+	if (_p != nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//iterator 는 const_iterator를 상속 받기 때문에, const_iterator에 주소를 생성한다. (iterator자체는 주소 없음)
+ForwardList::iterator::iterator(Node* p)
+	:const_iterator(p)
+{
+	
+}
+
+//operator는 우변값을 좌변에 넘겨주는 형태인데, 우변값의 매개변수가 없으므로 const_iterator 부모 클래스로 조작한다.
+
+//const_iterator에 접근해서 해당 주소에 대한 값을 반환한 다음, 반환 값을 int형 레퍼런스로 반환 => 역참조값을 출력해줌
+int& ForwardList::iterator::operator*() const
+{
+	return (int&)const_iterator::operator*();
+}
+
+//내부 주소를 반환(-> 자체가 내부주소에 접근하는 거임)
+//포인터 타입이므로, 데이터에 대한 주소를 반환 => const_iterator에 접근해서 데이터에 대한 주소값을 반환하게함
+int* ForwardList::iterator::operator->() const
+{
+	return (int*)const_iterator::operator->();
+}
+
+//자기 자신의 _p 주소값을 다음 주소로 변경한후 this를 사용해서 자기 자신의 주소값을 가져옴
+ForwardList::iterator& ForwardList::iterator::operator++()
+{
+	const_iterator::operator++();
+	return *this;
+}
+
+//자기 자신의 _p 주소를 따로 저장한뒤, 
+ForwardList::iterator ForwardList::iterator::operator++(int)
+{
+	iterator temp = *this;
+	const_iterator::operator++();
+	//const_iterator::operator++(0); => 아무 수나 넘기면 후위 연산자가 실행됨
+	return temp;
+}
+
+
 //기본 생성자
 ForwardList::ForwardList()
 {
@@ -42,8 +187,8 @@ ForwardList::ForwardList(const ForwardList& other)
 	}
 }
 
-
 ForwardList& ForwardList::operator=(const ForwardList& rhs)
+
 {
 	if (&rhs != this)
 	{
@@ -197,4 +342,28 @@ bool ForwardList::contains(int value) const
 	}
 
 	return false;
+}
+
+
+int main()
+{
+	ForwardList list(10);
+	
+	if (!list.contains(10))
+	{
+		std::cout << "틀렸습니다." << std::endl;
+	}
+	
+
+	for (ForwardList::iterator iter = list.begin(); iter != list.end(); iter++) //iter++에서 operator++(int) 실행되면서 다음 주소가 실행됨
+	{
+		std::cout << *iter << std::endl; //operator*()를 실행시킴으로써 _p->Data를 리턴함
+
+		//iter-> 직접적으로 사용못함 
+		//iter->는 멤버 접근하는데, iter자체는 class이므로 class를 int 포인터로 대입하려니까 안됨
+	}
+
+
+
+	return 0;
 }
