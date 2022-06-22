@@ -24,20 +24,20 @@ int main()
 	}
 
 
-	list<string> letters;
-	letters.push_back("abc");
-	string s{ "asd" };
-	letters.push_back(move(s));
+	//list<string> letters;
+	//letters.push_back("abc");
+	//string s{ "asd" };
+	//letters.push_back(move(s));
 
-	for (int i = 0; i < letters.size(); i++)
-	{
-		cout << letters[i] << endl;
-	}
+	//for (int i = 0; i < letters.size(); i++)
+	//{
+	//	cout << letters[i] << endl;
+	//}
 
-	for (auto element : letters)
-	{
-		cout << element << endl;
-	}
+	//for (auto element : letters)
+	//{
+	//	cout << element << endl;
+	//}
 	
 
 	return 0;
