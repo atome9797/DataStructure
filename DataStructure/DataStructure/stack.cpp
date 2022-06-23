@@ -3,6 +3,7 @@
 #include <vector>
 #include <forward_list>
 #include <list>
+#include "Stack.h"
 
 using namespace std;
 
