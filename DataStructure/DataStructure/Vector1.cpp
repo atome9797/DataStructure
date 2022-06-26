@@ -5,6 +5,17 @@
 using namespace std;
 int main()
 {
+    vector<int> vect;
+    vect.push_back(1);
+    vect.push_back(2);
+    vect.push_back(3);
+
+    for (vector<int>::iterator iter= vect.begin() ; iter != vect.end(); iter++)
+    {
+        cout << "Å×½ºÆ® " << *iter << endl;
+    }
+
+
     vector<int> vec;
     vector<int> vec2(5);
     vector<int> vec3 = { 1, 2, 3, 4, 5 };

@@ -136,8 +136,8 @@ int* List::iterator::operator->() const
 //리스트
 List::List()
 {
-	_end->Next = _end;
-	_end->Prev = _end;
+	_end->Next = _end; //begin() 지점
+	_end->Prev = _end; //end() 지점
 }
 
 //리스트 클래스 생성자
@@ -231,8 +231,8 @@ const int& List::back() const
 
 List::iterator List::insert(iterator pos, int value)
 {
-	Node* NextNode = pos._p; //B
-	Node* PrevNode = NextNode->Prev; //A
+	Node* NextNode = pos._p; //B  end() ,newNode(다음 노드 주소 받음)
+	Node* PrevNode = NextNode->Prev; //A  end->prev = end() ,end
 	//Node* newNode = new Node(value); //C
 
 	//newNode->Prev = NextNode; //A -> C

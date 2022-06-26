@@ -6,6 +6,21 @@ using namespace std;
 
 int main()
 {
+    forward_list<int> fl;
+    fl.push_front(1);
+    fl.push_front(2);
+    fl.push_front(3);
+
+    //후입선출 구조
+    for (forward_list<int>::iterator iter = fl.begin(); iter != fl.end(); iter++)
+    {
+        cout << *iter << endl;
+    }
+
+
+    
+
+
     std::forward_list<int> flist;
 
     // 삽입

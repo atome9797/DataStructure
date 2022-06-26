@@ -8,6 +8,27 @@ int main()
 	list<int> list1;
 
 	list1.push_front(1);
+	list1.push_front(2);
+	list1.push_front(3);
+
+	for (list<int>::iterator iter = list1.begin() ; iter != list1.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+	list<int> list20;
+
+	list20.push_back(1);
+	list20.push_back(2);
+	list20.push_back(3);
+
+	for (list<int>::iterator iter = list20.begin(); iter != list20.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+
+
 
 	list1.push_back(2);
 

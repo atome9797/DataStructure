@@ -90,6 +90,9 @@
     <ClCompile Include="deque_make.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="queue_test.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector1.h">

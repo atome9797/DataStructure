@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
 
+
 	stack<int> s;
 
 	vector<int> vec; 

@@ -12,6 +12,8 @@ int main()
 		q.push(i); //{1,2,3,4,5} front 1 ∫Œ≈Õ ªÃæ∆≥ø
 	}
 
+	std::cout << "q.front() : " << q.front() << "\n"; //2
+
 	//ªË¡¶
 	q.pop();// q{2,3,4,5}
 
@@ -24,6 +26,7 @@ int main()
 	{
 		std::cout << "q is empty\n";
 	}
+
 
 	std::cout << "q.size() : " << q.size() << "\n";
 
