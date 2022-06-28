@@ -102,6 +102,15 @@
     <ClCompile Include="graph2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="dijkstra_algorithm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="deletemean.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="dijkstra_algorithm2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector1.h">
