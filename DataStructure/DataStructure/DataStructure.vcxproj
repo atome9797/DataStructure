@@ -146,7 +146,9 @@
     <ClCompile Include="binary_search.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="binary_search_tree_make.cpp" />
+    <ClCompile Include="binary_search_tree_make.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Circle_Queue.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -174,6 +176,7 @@
     <ClCompile Include="queue_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Set.cpp" />
     <ClCompile Include="stack_make.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -245,6 +248,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Circle_Queue.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Set.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Vector1.h" />
     <ClInclude Include="Vector1_Test.h" />
