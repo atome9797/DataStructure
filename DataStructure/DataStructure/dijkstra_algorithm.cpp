@@ -25,6 +25,8 @@ std::vector<int> GetShortestPath(int start)
     std::vector<int> dist(7);
     for (int i = 0; i < 7; ++i)
         dist[i] = graph[start][i];
+    // 스타트 지점으로 부터 해당 정점의 거리를 배열에 넣어줌 
+    // 스타트 지점이 0일땐 dist는 0까지 거리, 1까지 거리, 2까지 거리, 3까지 거리...등등등 배열 들어가게됨
 
     // 방문한 정점 집합 만들기
     std::vector<bool> isVisited(7);
@@ -55,6 +57,7 @@ std::vector<int> GetShortestPath(int start)
         // 경로 업데이트
         for (size_t node = 0; node < 7; ++node)
         {
+            //거리중 node 1까지 거리가 7인데, next 3이고 0에서 3까지 거리 + 3에서 7까지 거리가 7보다 작으면 작은 거리로 갱신해줌
             dist[node] = std::min(dist[node], dist[next] + graph[next][node]);
         }
     }

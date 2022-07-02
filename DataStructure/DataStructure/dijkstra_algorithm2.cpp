@@ -29,6 +29,9 @@ vector<int> GetShortestPath(int start)
     {
         dist[i] = graph[start][i];
     }
+    // 스타트 지점으로 부터 해당 정점의 거리를 배열에 넣어줌 
+    // 스타트 지점이 0일땐 dist는 0까지 거리, 1까지 거리, 2까지 거리, 3까지 거리...등등등 배열 들어가게됨
+
 
     vector<bool> isVisited(7);
     isVisited[start] = true;
@@ -65,10 +68,7 @@ vector<int> GetShortestPath(int start)
 
         for (int node = 0; node < 7; node++)
         {
-            //0 정점의 행의 데이터 
-            //next : 4
-            //graph[4][node] : 3 + 0 만 갱신됨 => 0정점에서 4정점을 거쳐 1정점으로 가는게 0정점에서 1정점으로 가는거보다 빠르면 0 -> (node -1)까지의 최단거리는 두번 정점 거친값이 된다.
-            // 0 -> 1은 5로 갱신됨 7 > 3 + 2라서 5로 갱신 
+            //거리중 node 1까지 거리가 7인데, next 3이고 0에서 3까지 거리 + 3에서 7까지 거리가 7보다 작으면 작은 거리로 갱신해줌
             dist[node] = min(dist[node], dist[next] + graph[next][node]);
         }
     }
@@ -83,20 +83,21 @@ vector<int> GetShortestPath2(int start)
     //발견되지않은 정점은 모두 INF이다.
     vector<int> dist(7, INF);
 
-    //시작 정점은 거리가 0이다.
+    //시작 정점은 거리가 0이다. 자기 자신이기 때문!
     dist[start] = 0;
 
     //우선순위 큐를 이용한다. => 모든 원소중에서 가장 큰값이 top에 유지될수있도록 함
     priority_queue<pair<int, int>> pq;
-    //시작 정점을 넣어준다.
+    //시작 정점을 넣어준다. //  dist[start] = 0와 같은 뜻임
     pq.emplace(0, start);
 
     //dist 의 모든값을 찾을 때까지
     while (false == pq.empty())
     {
         //dist중에서 가장 최소값을 가지는 정점을 뽑아낸다.
-        int w = -pq.top().first;
-        int v = pq.top().second;
+        int w = -pq.top().first; //7
+        //priority_queue쓰면 큰값부터 정렬하기 때문에, 0부터 정렬하기 위해 -붙여줌
+        int v = pq.top().second; //1
         pq.pop();
 
         //과거에 발견한 최단 경로와 현재 최단 경로를 비교한다.
@@ -109,10 +110,11 @@ vector<int> GetShortestPath2(int start)
         //해당 정점을 이용했을때, 최단거리를 찾을수 있는지 체크한다.
         for (int node = 0; node < 7; node++)
         {
+            //여기서 W는 위의  dist[next]와 같다. 거리 갱신
             if (dist[node] > w + graph[v][node])
             {
-                dist[node] = w + graph[v][node];
-                pq.emplace(-dist[node], node);
+                dist[node] = w + graph[v][node]; //시작 정점이 0이면 첫줄은 그대로 dist거리에 들어감
+                pq.emplace(-dist[node], node); //해당 노드와 거리를 삽입해줌 0~7까지 들어감
             }
         }
     }
@@ -157,7 +159,8 @@ std::vector<int> GetShortestPathWithPath(int start, vector<int>& outPath)
             }
         }
     }
-
+    
+    //outPath = path; 와 동일
     outPath = std::move(path);
 
     return dist;

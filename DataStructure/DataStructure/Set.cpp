@@ -29,6 +29,7 @@ bool Set::Node::IsLeaf() const
 
 int Set::height() const
 {
+
 	return 0;
 }
 
