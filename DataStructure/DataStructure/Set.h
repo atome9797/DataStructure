@@ -1,6 +1,3 @@
-#pragma once
-#include <utility>
-
 class Set
 {
     struct Node
@@ -20,36 +17,38 @@ class Set
 
 public:
     // 트리의 높이를 구한다.
-    int                     height() const; // 큐를 이용한다.
-    int                     height2() const; // 재귀를 이용한다.
+    int         height() const; // 큐를 이용한다.
+    int         height2() const; // 재귀를 이용한다.
 
     // 트리가 비었는지 확인한다.
-    bool                    empty() const;
+    bool        empty() const;
 
     // 트리의 크기를 반환한다.
-    size_t                  size() const;
+    size_t      size() const;
 
     // 트리를 비운다.
-    void                    clear();
+    void        clear();
 
     // 트리에 값을 삽입한다.
-    std::pair<Node*, bool>       insert(int value);
+    bool        insert(int value);
 
     // 트리에서 값을 삭제한다.
-    void erase(Node* pos);
-    size_t      erase(int value);
+    void      erase(int value);
+    void      erase(Node* pos);
 
     // 트리에서 값을 찾는다.
-    Node* find(int value);
-    const Node* find(int value) const;
+    Node* find(int value) const;
 
     // 순회
     void        traverseByPreorder() const;
     void        traverseByInorder() const;
     void        traverseByPostorder() const;
     void        traverseByLevelorder() const;
-
 private:
-    Node* _root = nullptr;
-    size_t _size = 0;
+    void        traverseByPreorderHelper(Node*node) const;
+    void        traverseByInorderHelper(Node* node) const;
+    void        traverseByPostorderHelper(Node* node) const;
+private:
+    Node* _head = new Node(); //더미노드로 설정 _head->Parent 에 Root Node저장
+    size_t  _size = 0;
 };
