@@ -22,6 +22,15 @@ int main()
 	s.traverseByPostorder();
 	cout << "레벨 순회\n";
 	s.traverseByLevelorder();
+	cout << "\n";
+
+	s.erase(10);
+	//s.traverseByInorder();
+
+
+
+
+
 
 	return 0;
 }

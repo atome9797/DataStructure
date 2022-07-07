@@ -5,9 +5,7 @@ class Set
         Node(int data = 0, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr);
         Node(const Node&) = delete;
         Node& operator=(const Node&) = delete;
-        ~Node();
-
-        bool    IsLeaf() const;
+        ~Node() = default;
 
         int     Data = 0;
         Node* Parent = nullptr;
@@ -16,6 +14,7 @@ class Set
     };
 
 public:
+    ~Set();
     // 트리의 높이를 구한다.
     int         height() const; // 큐를 이용한다.
     int         height2() const; // 재귀를 이용한다.
@@ -48,6 +47,8 @@ private:
     void        traverseByPreorderHelper(Node*node) const;
     void        traverseByInorderHelper(Node* node) const;
     void        traverseByPostorderHelper(Node* node) const;
+
+    int         heightHelper(Node* node) const;
 private:
     Node* _head = new Node(); //더미노드로 설정 _head->Parent 에 Root Node저장
     size_t  _size = 0;
