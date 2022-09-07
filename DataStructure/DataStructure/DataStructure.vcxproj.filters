@@ -138,6 +138,15 @@
     <ClCompile Include="Program.cs">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Heap.h">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Heap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HeapTest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector1.h">
